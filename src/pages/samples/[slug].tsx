@@ -24,6 +24,7 @@ export const pages = {
   animometer: dynamic(() => import('../../sample/animometer/main')),
   videoUploading: dynamic(() => import('../../sample/videoUploading/main')),
   imageBlur: dynamic(() => import('../../sample/imageBlur/main')),
+  imageDenoise: dynamic(() => import('../../sample/imageDenoise/main')),
   shadowMapping: dynamic(() => import('../../sample/shadowMapping/main')),
   reversedZ: dynamic(() => import('../../sample/reversedZ/main')),
   deferredRendering: dynamic(
