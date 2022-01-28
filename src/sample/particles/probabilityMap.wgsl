@@ -1,8 +1,8 @@
-[[block]] struct UBO {
+struct UBO {
   width : u32;
 };
 
-[[block]] struct Buffer {
+struct Buffer {
   weights : array<f32>;
 };
 

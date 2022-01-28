@@ -1,7 +1,7 @@
 // TODO: Use pipeline constants
 let shadowDepthTextureSize: f32 = 1024.0;
 
-[[block]] struct Scene {
+struct Scene {
   lightViewProjMatrix : mat4x4<f32>;
   cameraViewProjMatrix : mat4x4<f32>;
   lightPos : vec3<f32>;

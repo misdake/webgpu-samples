@@ -2,7 +2,7 @@
 [[group(0), binding(1)]] var gBufferNormal: texture_2d<f32>;
 [[group(0), binding(2)]] var gBufferAlbedo: texture_2d<f32>;
 
-[[block]] struct CanvasConstants {
+struct CanvasConstants {
   size: vec2<f32>;
 };
 [[group(1), binding(0)]] var<uniform> canvas : CanvasConstants;

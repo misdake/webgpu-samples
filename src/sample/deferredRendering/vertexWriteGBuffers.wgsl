@@ -1,8 +1,8 @@
-[[block]] struct Uniforms {
+struct Uniforms {
   modelMatrix : mat4x4<f32>;
   normalModelMatrix : mat4x4<f32>;
 };
-[[block]] struct Camera {
+struct Camera {
   viewProjectionMatrix : mat4x4<f32>;
 };
 [[group(0), binding(0)]] var<uniform> uniforms : Uniforms;

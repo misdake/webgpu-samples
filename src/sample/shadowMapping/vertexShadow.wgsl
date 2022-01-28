@@ -1,10 +1,10 @@
-[[block]] struct Scene {
+struct Scene {
   lightViewProjMatrix : mat4x4<f32>;
   cameraViewProjMatrix : mat4x4<f32>;
   lightPos : vec3<f32>;
 };
 
-[[block]] struct Model {
+struct Model {
   modelMatrix : mat4x4<f32>;
 };
 

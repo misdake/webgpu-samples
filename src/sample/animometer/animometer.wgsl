@@ -1,8 +1,8 @@
-[[block]] struct Time {
+struct Time {
   value : f32;
 };
 
-[[block]] struct Uniforms {
+struct Uniforms {
   scale : f32;
   offsetX : f32;
   offsetY : f32;

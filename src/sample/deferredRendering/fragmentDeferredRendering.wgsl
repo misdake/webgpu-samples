@@ -7,17 +7,17 @@ struct LightData {
   color : vec3<f32>;
   radius : f32;
 };
-[[block]] struct LightsBuffer {
+struct LightsBuffer {
   lights: array<LightData>;
 };
 [[group(1), binding(0)]] var<storage, read> lightsBuffer: LightsBuffer;
 
-[[block]] struct Config {
+struct Config {
   numLights : u32;
 };
 [[group(1), binding(1)]] var<uniform> config: Config;
 
-[[block]] struct CanvasConstants {
+struct CanvasConstants {
   size: vec2<f32>;
 };
 [[group(2), binding(0)]] var<uniform> canvas : CanvasConstants;

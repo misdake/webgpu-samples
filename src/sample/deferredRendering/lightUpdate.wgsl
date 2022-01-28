@@ -3,17 +3,17 @@ struct LightData {
   color : vec3<f32>;
   radius : f32;
 };
-[[block]] struct LightsBuffer {
+struct LightsBuffer {
   lights: array<LightData>;
 };
 [[group(0), binding(0)]] var<storage, read_write> lightsBuffer: LightsBuffer;
 
-[[block]] struct Config {
+struct Config {
   numLights : u32;
 };
 [[group(0), binding(1)]] var<uniform> config: Config;
 
-[[block]] struct LightExtent {
+struct LightExtent {
   min : vec4<f32>;
   max : vec4<f32>;
 };

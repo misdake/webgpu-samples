@@ -12,7 +12,7 @@ fn rand() -> f32 {
 ////////////////////////////////////////////////////////////////////////////////
 // Vertex shader
 ////////////////////////////////////////////////////////////////////////////////
-[[block]] struct RenderParams {
+struct RenderParams {
   modelViewProjectionMatrix : mat4x4<f32>;
   right : vec3<f32>;
   up    : vec3<f32>;
@@ -56,7 +56,7 @@ fn fs_main(in : VertexOutput) -> [[location(0)]] vec4<f32> {
 ////////////////////////////////////////////////////////////////////////////////
 // Simulation Compute shader
 ////////////////////////////////////////////////////////////////////////////////
-[[block]] struct SimulationParams {
+struct SimulationParams {
   deltaTime : f32;
   seed : vec4<f32>;
 };
@@ -68,7 +68,7 @@ struct Particle {
   velocity : vec3<f32>;
 };
 
-[[block]] struct Particles {
+struct Particles {
   particles : array<Particle>;
 };
 

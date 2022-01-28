@@ -1,4 +1,4 @@
-[[block]] struct Uniforms {
+struct Uniforms {
   modelViewProjectionMatrix : [[stride(64)]] array<mat4x4<f32>, 16>;
 };
 

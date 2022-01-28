@@ -2,7 +2,7 @@ struct Particle {
   pos : vec2<f32>;
   vel : vec2<f32>;
 };
-[[block]] struct SimParams {
+struct SimParams {
   deltaT : f32;
   rule1Distance : f32;
   rule2Distance : f32;
@@ -11,7 +11,7 @@ struct Particle {
   rule2Scale : f32;
   rule3Scale : f32;
 };
-[[block]] struct Particles {
+struct Particles {
   particles : [[stride(16)]] array<Particle>;
 };
 [[binding(0), group(0)]] var<uniform> params : SimParams;

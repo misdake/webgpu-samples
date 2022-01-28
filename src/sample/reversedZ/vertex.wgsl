@@ -1,7 +1,7 @@
-[[block]] struct Uniforms {
+struct Uniforms {
   modelMatrix : array<mat4x4<f32>, 5>;
 };
-[[block]] struct Camera {
+struct Camera {
   viewProjectionMatrix : mat4x4<f32>;
 };
 
