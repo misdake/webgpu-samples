@@ -1,4 +1,4 @@
-[[block]] struct Uniforms {
+struct Uniforms {
   modelViewProjectionMatrix : mat4x4<f32>;
 };
 [[binding(0), group(0)]] var<uniform> uniforms : Uniforms;
@@ -15,6 +15,6 @@ fn main([[location(0)]] position : vec4<f32>,
   var output : VertexOutput;
   output.Position = uniforms.modelViewProjectionMatrix * position;
   output.fragUV = uv;
-  output.fragPosition = 0.5 * (position + vec4<f32>(1.0, 1.0, 1.0, 1.0));
+  output.fragPosition = 0.5 * position + vec4<f32>(0.5, 0.5, 0.5, 0.5);
   return output;
 }

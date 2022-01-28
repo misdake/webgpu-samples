@@ -18,6 +18,7 @@ export const pages = {
   rotatingCube: dynamic(() => import('../../sample/rotatingCube/main')),
   twoCubes: dynamic(() => import('../../sample/twoCubes/main')),
   texturedCube: dynamic(() => import('../../sample/texturedCube/main')),
+  textureIndex: dynamic(() => import('../../sample/textureIndex/main')),
   instancedCube: dynamic(() => import('../../sample/instancedCube/main')),
   fractalCube: dynamic(() => import('../../sample/fractalCube/main')),
   computeBoids: dynamic(() => import('../../sample/computeBoids/main')),

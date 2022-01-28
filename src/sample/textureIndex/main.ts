@@ -110,34 +110,50 @@ const init: SampleInit = async ({ canvasRef }) => {
     usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
   });
 
-  // Fetch the image and upload it into a GPUTexture.
-  let cubeTexture: GPUTexture;
-  {
-    const img = document.createElement('img');
-    img.src = require('../../../assets/img/demo.png');
-    await img.decode();
-    const imageBitmap = await createImageBitmap(img);
+  async function createTextureArray(files: string[]): Promise<GPUTexture> {
+    let promises = files.map(async url => {
+      // const img = document.createElement('img');
+      // img.src = url;
+      // await img.decode();
+      // const imageBitmap = await createImageBitmap(img);
 
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const imageBitmap = await createImageBitmap(blob);
+
+      return imageBitmap;
+    });
+
+    let images = await Promise.all(promises);
+
+    let first = images[0];
     let textureDescriptor: GPUTextureDescriptor = {
-      size: [imageBitmap.width, imageBitmap.height, 1],
-      mipLevelCount: expectedMipLevelCount(imageBitmap.width, imageBitmap.height),
+      size: {width: first.width, height: first.height, depthOrArrayLayers: images.length},
+      mipLevelCount: expectedMipLevelCount(first.width, first.height),
       format: 'rgba8unorm',
       usage:
         GPUTextureUsage.TEXTURE_BINDING |
         GPUTextureUsage.COPY_DST |
         GPUTextureUsage.RENDER_ATTACHMENT,
     };
-    cubeTexture = device.createTexture(textureDescriptor);
+    let texture = device.createTexture(textureDescriptor);
 
-    device.queue.copyExternalImageToTexture(
-      { source: imageBitmap },
-      { texture: cubeTexture },
-      [imageBitmap.width, imageBitmap.height]
-    );
+    images.forEach((image, i) => {
+      device.queue.copyExternalImageToTexture(
+        { source: image },
+        { texture: texture, origin: {z: i} },
+        { width: image.width, height: image.height },
+      );
+    });
 
     let mipmapGenerator = new WebGPUMipmapGenerator(device);
-    cubeTexture = mipmapGenerator.generateMipmap(cubeTexture, textureDescriptor);
+    texture = mipmapGenerator.generateMipmap(texture, textureDescriptor);
+
+    return texture;
   }
+
+  // Fetch the image and upload it into a GPUTexture.
+  const texture: GPUTexture = await createTextureArray([require('../../../assets/img/Di-3d.png'), require('../../../assets/img/sprite.png')]);
 
   // Create a sampler with linear filtering for smooth interpolation.
   const sampler = device.createSampler({
@@ -162,7 +178,7 @@ const init: SampleInit = async ({ canvasRef }) => {
       },
       {
         binding: 2,
-        resource: cubeTexture.createView(),
+        resource: texture.createView({arrayLayerCount: 2, dimension: "2d-array"}),
       },
     ],
   });
@@ -239,8 +255,8 @@ const init: SampleInit = async ({ canvasRef }) => {
 
 const TexturedCube: () => JSX.Element = () =>
   makeSample({
-    name: 'Textured Cube',
-    description: 'This example shows how to bind and sample textures.',
+    name: 'Texture Index',
+    description: 'This example shows how to select texture in shader.',
     init,
     sources: [
       {
