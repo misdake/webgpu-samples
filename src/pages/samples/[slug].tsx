@@ -26,6 +26,7 @@ export const pages = {
   videoUploading: dynamic(() => import('../../sample/videoUploading/main')),
   imageBlur: dynamic(() => import('../../sample/imageBlur/main')),
   imageDenoise: dynamic(() => import('../../sample/imageDenoise/main')),
+  imageHistogram: dynamic(() => import('../../sample/imageHistogram/main')),
   shadowMapping: dynamic(() => import('../../sample/shadowMapping/main')),
   reversedZ: dynamic(() => import('../../sample/reversedZ/main')),
   deferredRendering: dynamic(
