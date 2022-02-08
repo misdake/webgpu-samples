@@ -3,7 +3,7 @@ import { makeSample, SampleInit } from '../../components/SampleLayout';
 import denoiseWGSL from './denoise.wgsl';
 import fullscreenTexturedQuadWGSL from '../../shaders/fullscreenTexturedQuad.wgsl';
 
-// Contants from the denoise.wgsl shader.
+// Constants from the denoise.wgsl shader.
 const tileDim = 16;
 
 const init: SampleInit = async ({ canvasRef, gui }) => {
@@ -64,7 +64,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
   });
 
   const img = document.createElement('img');
-  img.src = require('../../../assets/img/demo.png');
+  img.src = require('../../../assets/img/noisy.png');
   await img.decode();
   const imageBitmap = await createImageBitmap(img);
 

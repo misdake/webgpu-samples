@@ -3,7 +3,7 @@ import { makeSample, SampleInit } from '../../components/SampleLayout';
 import blurWGSL from './blur.wgsl';
 import fullscreenTexturedQuadWGSL from '../../shaders/fullscreenTexturedQuad.wgsl';
 
-// Contants from the blur.wgsl shader.
+// Constants from the blur.wgsl shader.
 const tileDim = 128;
 const batch = [4, 4];
 

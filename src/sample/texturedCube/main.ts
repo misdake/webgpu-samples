@@ -114,7 +114,7 @@ const init: SampleInit = async ({ canvasRef }) => {
   let cubeTexture: GPUTexture;
   {
     const img = document.createElement('img');
-    img.src = require('../../../assets/img/demo.png');
+    img.src = require('../../../assets/img/Di-3d.png');
     await img.decode();
     const imageBitmap = await createImageBitmap(img);
 
