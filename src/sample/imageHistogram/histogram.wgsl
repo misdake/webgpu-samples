@@ -35,5 +35,7 @@ fn main(
     //遍历256种灰度，原子写入global
     let index = LocalInvocationID.x * 16u + LocalInvocationID.y;
     let v = atomicLoad(&localHist[index]);
-    atomicAdd(&globalHist[index], v);
+    if (v > 0u) {
+      atomicAdd(&globalHist[index], v);
+    }
 }

@@ -160,7 +160,7 @@ const init: SampleInit = async ({ canvasRef, gui: _gui }) => {
       Math.ceil(srcHeight / tileDim),
     );
 
-    computePass.end();
+    computePass.endPass();
 
     const passEncoder = commandEncoder.beginRenderPass({
       colorAttachments: [
@@ -176,7 +176,7 @@ const init: SampleInit = async ({ canvasRef, gui: _gui }) => {
     passEncoder.setPipeline(fullscreenQuadPipeline);
     passEncoder.setBindGroup(0, showResultBindGroup);
     passEncoder.draw(6, 1, 0, 0);
-    passEncoder.end();
+    passEncoder.endPass();
 
     const TEST_PERF = false;
 
