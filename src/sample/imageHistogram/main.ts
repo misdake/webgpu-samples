@@ -75,7 +75,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
 
   const histogramResult = device.createBuffer({
     size: 256 * 4,
-    usage: GPUBufferUsage.COPY_SRC | GPUBufferUsage.STORAGE,
+    usage: GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE,
   });
   const histogramRead = device.createBuffer({
     size: 256 * 4,
@@ -150,6 +150,8 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
 
     const commandEncoder = device.createCommandEncoder();
 
+    commandEncoder.clearBuffer(histogramResult, 0, 256 * 4);
+
     const computePass = commandEncoder.beginComputePass();
     computePass.setPipeline(histogramPipeline);
     computePass.setBindGroup(0, computeBindGroup);
@@ -164,6 +166,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
       colorAttachments: [
         {
           view: context.getCurrentTexture().createView(),
+          loadOp: "clear",
           loadValue: { r: 0.0, g: 0.0, b: 0.0, a: 1.0 },
           storeOp: "store",
         },
@@ -192,6 +195,8 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
         }
         console.log(`${sum} expected: ${srcWidth * srcHeight}`);
         console.log(result);
+        histogramRead.unmap();
+        // requestAnimationFrame(frame);
       });
     }
   }
