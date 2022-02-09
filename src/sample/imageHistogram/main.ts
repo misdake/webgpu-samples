@@ -5,7 +5,7 @@ import fullscreenTexturedQuadWGSL from "../../shaders/fullscreenTexturedQuad.wgs
 
 const tileDim = 64;
 
-const init: SampleInit = async ({ canvasRef, gui }) => {
+const init: SampleInit = async ({ canvasRef, gui: _gui }) => {
   const adapter = await navigator.gpu.requestAdapter();
   const device = await adapter.requestDevice();
 
@@ -160,7 +160,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
       Math.ceil(srcHeight / tileDim),
     );
 
-    computePass.endPass();
+    computePass.end();
 
     const passEncoder = commandEncoder.beginRenderPass({
       colorAttachments: [
@@ -176,7 +176,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
     passEncoder.setPipeline(fullscreenQuadPipeline);
     passEncoder.setBindGroup(0, showResultBindGroup);
     passEncoder.draw(6, 1, 0, 0);
-    passEncoder.endPass();
+    passEncoder.end();
 
     const TEST_PERF = false;
 
