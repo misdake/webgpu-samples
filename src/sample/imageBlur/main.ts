@@ -81,7 +81,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
   device.queue.copyExternalImageToTexture(
     { source: imageBitmap },
     { texture: cubeTexture },
-    [imageBitmap.width, imageBitmap.height]
+    [imageBitmap.width, imageBitmap.height],
   );
 
   const textures = [0, 1].map(() => {
@@ -226,7 +226,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
     device.queue.writeBuffer(
       blurParamsBuffer,
       0,
-      new Uint32Array([settings.filterSize, blockDim])
+      new Uint32Array([settings.filterSize, blockDim]),
     );
   };
   gui.add(settings, 'filterSize', 1, 33).step(2).onChange(updateSettings);
@@ -247,26 +247,26 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
     computePass.setBindGroup(1, computeBindGroup0);
     computePass.dispatch(
       Math.ceil(srcWidth / blockDim),
-      Math.ceil(srcHeight / batch[1])
+      Math.ceil(srcHeight / batch[1]),
     );
 
     computePass.setBindGroup(1, computeBindGroup1);
     computePass.dispatch(
       Math.ceil(srcHeight / blockDim),
-      Math.ceil(srcWidth / batch[1])
+      Math.ceil(srcWidth / batch[1]),
     );
 
     for (let i = 0; i < settings.iterations - 1; ++i) {
       computePass.setBindGroup(1, computeBindGroup2);
       computePass.dispatch(
         Math.ceil(srcWidth / blockDim),
-        Math.ceil(srcHeight / batch[1])
+        Math.ceil(srcHeight / batch[1]),
       );
 
       computePass.setBindGroup(1, computeBindGroup1);
       computePass.dispatch(
         Math.ceil(srcHeight / blockDim),
-        Math.ceil(srcWidth / batch[1])
+        Math.ceil(srcWidth / batch[1]),
       );
     }
 
@@ -276,6 +276,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
       colorAttachments: [
         {
           view: context.getCurrentTexture().createView(),
+          loadOp: 'clear',
           loadValue: { r: 0.0, g: 0.0, b: 0.0, a: 1.0 },
           storeOp: 'store',
         },
@@ -290,6 +291,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
 
     requestAnimationFrame(frame);
   }
+
   requestAnimationFrame(frame);
 };
 

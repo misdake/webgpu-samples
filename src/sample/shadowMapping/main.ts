@@ -199,7 +199,7 @@ const init: SampleInit = async ({ canvasRef }) => {
       {
         // view is acquired and set in render loop.
         view: undefined,
-
+        loadOp: 'clear',
         loadValue: { r: 0.5, g: 0.5, b: 0.5, a: 1.0 },
         storeOp: 'store',
       },

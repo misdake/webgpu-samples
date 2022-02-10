@@ -80,7 +80,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
   device.queue.copyExternalImageToTexture(
     { source: imageBitmap },
     { texture: inputTexture },
-    [imageBitmap.width, imageBitmap.height]
+    [imageBitmap.width, imageBitmap.height],
   );
 
   const computeTexture = device.createTexture({
@@ -138,7 +138,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
     device.queue.writeBuffer(
       denoiseParamsBuffer,
       0,
-      new Uint32Array([settings.filterSize, blockDim])
+      new Uint32Array([settings.filterSize, blockDim]),
     );
   };
   updateSettings();
@@ -156,7 +156,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
     computePass.setBindGroup(0, computeBindGroup);
     computePass.dispatch(
       Math.ceil(srcWidth / blockDim),
-      Math.ceil(srcHeight / blockDim)
+      Math.ceil(srcHeight / blockDim),
     );
 
     computePass.endPass();
@@ -165,6 +165,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
       colorAttachments: [
         {
           view: context.getCurrentTexture().createView(),
+          loadOp: 'clear',
           loadValue: { r: 0.0, g: 0.0, b: 0.0, a: 1.0 },
           storeOp: 'store',
         },
@@ -179,6 +180,7 @@ const init: SampleInit = async ({ canvasRef, gui }) => {
 
     requestAnimationFrame(frame);
   }
+
   requestAnimationFrame(frame);
 };
 

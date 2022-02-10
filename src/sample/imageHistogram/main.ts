@@ -1,7 +1,7 @@
-import { makeSample, SampleInit } from "../../components/SampleLayout";
+import { makeSample, SampleInit } from '../../components/SampleLayout';
 
-import histogramWGSL from "./histogram.wgsl";
-import fullscreenTexturedQuadWGSL from "../../shaders/fullscreenTexturedQuad.wgsl";
+import histogramWGSL from './histogram.wgsl';
+import fullscreenTexturedQuadWGSL from '../../shaders/fullscreenTexturedQuad.wgsl';
 
 const tileDim = 64;
 
@@ -10,7 +10,7 @@ const init: SampleInit = async ({ canvasRef, gui: _gui }) => {
   const device = await adapter.requestDevice();
 
   if (canvasRef.current === null) return;
-  const context = canvasRef.current.getContext("webgpu");
+  const context = canvasRef.current.getContext('webgpu');
 
   const devicePixelRatio = window.devicePixelRatio || 1;
   const presentationSize = [
@@ -30,13 +30,13 @@ const init: SampleInit = async ({ canvasRef, gui: _gui }) => {
       module: device.createShaderModule({
         code: fullscreenTexturedQuadWGSL,
       }),
-      entryPoint: "vert_main",
+      entryPoint: 'vert_main',
     },
     fragment: {
       module: device.createShaderModule({
         code: fullscreenTexturedQuadWGSL,
       }),
-      entryPoint: "frag_main",
+      entryPoint: 'frag_main',
       targets: [
         {
           format: presentationFormat,
@@ -44,24 +44,24 @@ const init: SampleInit = async ({ canvasRef, gui: _gui }) => {
       ],
     },
     primitive: {
-      topology: "triangle-list",
+      topology: 'triangle-list',
     },
   });
 
   const sampler = device.createSampler({
-    magFilter: "nearest",
-    minFilter: "nearest",
+    magFilter: 'nearest',
+    minFilter: 'nearest',
   });
 
-  const img = document.createElement("img");
-  img.src = require("../../../assets/img/scene.png");
+  const img = document.createElement('img');
+  img.src = require('../../../assets/img/scene.png');
   await img.decode();
   const imageBitmap = await createImageBitmap(img);
 
   const [srcWidth, srcHeight] = [imageBitmap.width, imageBitmap.height];
   const inputTexture = device.createTexture({
     size: [srcWidth, srcHeight, 1],
-    format: "rgba8unorm",
+    format: 'rgba8unorm',
     usage:
       GPUTextureUsage.TEXTURE_BINDING |
       GPUTextureUsage.COPY_DST |
@@ -88,8 +88,8 @@ const init: SampleInit = async ({ canvasRef, gui: _gui }) => {
         binding: 0,
         visibility: GPUShaderStage.COMPUTE,
         texture: {
-          sampleType: "float",
-          viewDimension: "2d",
+          sampleType: 'float',
+          viewDimension: '2d',
           multisampled: false,
         },
       },
@@ -97,7 +97,7 @@ const init: SampleInit = async ({ canvasRef, gui: _gui }) => {
         binding: 1,
         visibility: GPUShaderStage.COMPUTE,
         buffer: {
-          type: "storage",
+          type: 'storage',
           hasDynamicOffset: false,
           minBindingSize: 256 * 4,
         },
@@ -109,7 +109,7 @@ const init: SampleInit = async ({ canvasRef, gui: _gui }) => {
       module: device.createShaderModule({
         code: histogramWGSL,
       }),
-      entryPoint: "main",
+      entryPoint: 'main',
     },
     layout: device.createPipelineLayout({
       bindGroupLayouts: [computeBindGroupLayout],
@@ -166,9 +166,9 @@ const init: SampleInit = async ({ canvasRef, gui: _gui }) => {
       colorAttachments: [
         {
           view: context.getCurrentTexture().createView(),
-          loadOp: "clear",
+          loadOp: 'clear',
           loadValue: { r: 0.0, g: 0.0, b: 0.0, a: 1.0 },
-          storeOp: "store",
+          storeOp: 'store',
         },
       ],
     });
@@ -206,9 +206,9 @@ const init: SampleInit = async ({ canvasRef, gui: _gui }) => {
 
 const ImageHistogram: () => JSX.Element = () =>
   makeSample({
-    name: "Image histogram",
+    name: 'Image histogram',
     description:
-      "This example shows how to generate histogram of an image using a WebGPU compute shader.",
+      'This example shows how to generate histogram of an image using a WebGPU compute shader.',
     gui: true,
     init,
     sources: [
@@ -217,12 +217,12 @@ const ImageHistogram: () => JSX.Element = () =>
         contents: __SOURCE__,
       },
       {
-        name: "./histogram.wgsl",
+        name: './histogram.wgsl',
         contents: histogramWGSL,
         editable: true,
       },
       {
-        name: "../../shaders/fullscreenTexturedQuad.wgsl",
+        name: '../../shaders/fullscreenTexturedQuad.wgsl',
         contents: fullscreenTexturedQuadWGSL,
         editable: true,
       },
