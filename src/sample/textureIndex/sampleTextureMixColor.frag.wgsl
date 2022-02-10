@@ -5,7 +5,7 @@ struct Uniforms {
 @group(0) @binding(1) var mySampler: sampler;
 @group(0) @binding(2) var myTexture: texture_2d_array<f32>;
 
-@group(1) @binding(0) var<uniform> indices : array<int32, 2>;
+@group(1) @binding(0) var<uniform> indices : vec2<i32>;
 
 @stage(fragment)
 fn main(@location(0) fragUV: vec2<f32>,
