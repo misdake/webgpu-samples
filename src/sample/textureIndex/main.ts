@@ -187,7 +187,7 @@ const init: SampleInit = async ({ canvasRef }) => {
     colorAttachments: [
       {
         view: undefined, // Assigned later
-
+        loadOp: "clear",
         loadValue: { r: 0.5, g: 0.5, b: 0.5, a: 1.0 },
         storeOp: 'store',
       },

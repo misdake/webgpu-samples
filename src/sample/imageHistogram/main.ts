@@ -204,7 +204,7 @@ const init: SampleInit = async ({ canvasRef, gui: _gui }) => {
   requestAnimationFrame(frame);
 };
 
-const Imagehistogram: () => JSX.Element = () =>
+const ImageHistogram: () => JSX.Element = () =>
   makeSample({
     name: "Image histogram",
     description:
@@ -230,4 +230,4 @@ const Imagehistogram: () => JSX.Element = () =>
     filename: __filename,
   });
 
-export default Imagehistogram;
+export default ImageHistogram;
