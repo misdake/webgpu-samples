@@ -10,29 +10,25 @@ type Props = {
 };
 
 export const pages = {
-  helloTriangle: dynamic(() => import('../../sample/helloTriangle/main')),
-  helloTriangleMSAA: dynamic(
-    () => import('../../sample/helloTriangleMSAA/main')
-  ),
-  resizeCanvas: dynamic(() => import('../../sample/resizeCanvas/main')),
-  rotatingCube: dynamic(() => import('../../sample/rotatingCube/main')),
-  twoCubes: dynamic(() => import('../../sample/twoCubes/main')),
-  texturedCube: dynamic(() => import('../../sample/texturedCube/main')),
-  textureIndex: dynamic(() => import('../../sample/textureIndex/main')),
-  instancedCube: dynamic(() => import('../../sample/instancedCube/main')),
-  fractalCube: dynamic(() => import('../../sample/fractalCube/main')),
-  computeBoids: dynamic(() => import('../../sample/computeBoids/main')),
   animometer: dynamic(() => import('../../sample/animometer/main')),
-  videoUploading: dynamic(() => import('../../sample/videoUploading/main')),
+  computeBoids: dynamic(() => import('../../sample/computeBoids/main')),
+  deferredRendering: dynamic(() => import('../../sample/deferredRendering/main')),
+  fractalCube: dynamic(() => import('../../sample/fractalCube/main')),
+  helloTriangle: dynamic(() => import('../../sample/helloTriangle/main')),
+  helloTriangleMSAA: dynamic(() => import('../../sample/helloTriangleMSAA/main')),
   imageBlur: dynamic(() => import('../../sample/imageBlur/main')),
   imageDenoise: dynamic(() => import('../../sample/imageDenoise/main')),
   imageHistogram: dynamic(() => import('../../sample/imageHistogram/main')),
-  shadowMapping: dynamic(() => import('../../sample/shadowMapping/main')),
-  reversedZ: dynamic(() => import('../../sample/reversedZ/main')),
-  deferredRendering: dynamic(
-    () => import('../../sample/deferredRendering/main')
-  ),
+  instancedCube: dynamic(() => import('../../sample/instancedCube/main')),
   particles: dynamic(() => import('../../sample/particles/main')),
+  resizeCanvas: dynamic(() => import('../../sample/resizeCanvas/main')),
+  reversedZ: dynamic(() => import('../../sample/reversedZ/main')),
+  rotatingCube: dynamic(() => import('../../sample/rotatingCube/main')),
+  shadowMapping: dynamic(() => import('../../sample/shadowMapping/main')),
+  texturedCube: dynamic(() => import('../../sample/texturedCube/main')),
+  textureIndex: dynamic(() => import('../../sample/textureIndex/main')),
+  twoCubes: dynamic(() => import('../../sample/twoCubes/main')),
+  videoUploading: dynamic(() => import('../../sample/videoUploading/main')),
 };
 
 function Page({ slug }: Props): JSX.Element {

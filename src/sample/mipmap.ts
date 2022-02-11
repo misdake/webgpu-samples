@@ -109,6 +109,7 @@ export class WebGPUMipmapGenerator {
         const passEncoder = commandEncoder.beginRenderPass({
           colorAttachments: [{
             view: dstView,
+            loadOp: 'clear',
             loadValue: [0, 0, 0, 0],
             storeOp: 'store'
           }],
