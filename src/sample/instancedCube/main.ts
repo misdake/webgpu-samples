@@ -111,9 +111,9 @@ const init: SampleInit = async ({ canvasRef }) => {
 
   // Allocate a buffer large enough to hold transforms for every
   // instance.
-  const uniformBuffer = device.createBuffer({
+  const storageBuffer = device.createBuffer({
     size: uniformBufferSize,
-    usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+    usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
   });
 
   const uniformBindGroup = device.createBindGroup({
@@ -122,7 +122,7 @@ const init: SampleInit = async ({ canvasRef }) => {
       {
         binding: 0,
         resource: {
-          buffer: uniformBuffer,
+          buffer: storageBuffer,
         },
       },
     ],
@@ -194,7 +194,7 @@ const init: SampleInit = async ({ canvasRef }) => {
     colorAttachments: [
       {
         view: undefined, // Assigned later
-
+        loadOp: 'clear',
         loadValue: { r: 0.5, g: 0.5, b: 0.5, a: 1.0 },
         storeOp: 'store',
       },
@@ -216,7 +216,7 @@ const init: SampleInit = async ({ canvasRef }) => {
     // Update the matrix data.
     updateTransformationMatrix();
     device.queue.writeBuffer(
-      uniformBuffer,
+      storageBuffer,
       0,
       mvpMatricesData.buffer,
       mvpMatricesData.byteOffset,
